@@ -1,0 +1,22 @@
+  - alias: "Lightbox Transition Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_slider.lightbox_transition_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "lightbox/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+  - alias: "Theater Transition Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_slider.theater_transition_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "ledctrl-theater/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
