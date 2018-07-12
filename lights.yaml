@@ -1,0 +1,85 @@
+  - platform: mqtt_json  
+    name: "LEDCTRL Upstairs"  
+    state_topic: "ledctrl-ulhall"  
+    command_topic: "ledctrl-ulhall/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0  
+  - platform: mqtt_json  
+    name: "LEDCTRL Downstairs"  
+    state_topic: "ledctrl-llhall"  
+    command_topic: "ledctrl-llhall/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0 
+  - platform: mqtt_json  
+    name: "LEDCTRL Kitchen"  
+    state_topic: "ledctrl-kitchen"  
+    command_topic: "ledctrl-kitchen/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0 
+  - platform: mqtt_json
+    name: "Lightbox"
+    state_topic: "lightbox"
+    command_topic: "lightbox/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane  
+      - confetti  
+      - cyclon rainbow  
+      - dots  
+      - fire  
+      - glitter  
+      - juggle  
+      - lightning
+      - noise  
+      - police all  
+      - police one  
+      - rainbow  
+      - rainbow with glitter  
+      - ripple  
+      - sinelon  
+      - solid  
+      - twinkle  
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+  - platform: mqtt_json
+    name: "Theater Accent"
+    state_topic: "ledctrl-theater"
+    command_topic: "ledctrl-theater/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane  
+      - confetti  
+      - cyclon rainbow  
+      - dots  
+      - fire  
+      - glitter  
+      - juggle  
+      - lightning
+      - noise  
+      - police all  
+      - police one  
+      - rainbow  
+      - rainbow with glitter  
+      - ripple  
+      - sinelon  
+      - solid  
+      - twinkle  
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
