@@ -1,0 +1,65 @@
+#  - platform: command_line
+#    switches:
+#      upstairs_hallway_led:
+#        command_on: "/usr/bin/curl -X GET http://172.16.3.100/COLOR=RED"
+#        command_off: "/usr/bin/curl -X GET http://172.16.3.100/LED=OFF"
+#        value_template: '{{ value == "1" }}'
+#        friendly_name: Upstairs Hallway LED
+#  - platform: mqtt
+#    name: "Upstairs Hallway LED"
+#    command_topic: "ledcontrol/alpha/control"
+#    state_topic: "ledcontrol/alpha/state"
+#    payload_on: "R255"
+#    payload_off: "R0"
+#    optimistic: false
+#    qos: 1
+#    retain: true
+  - platform: mqtt
+    name: "Bedtime"
+    command_topic: "scene/ctrl"
+    payload_on: "bedtimeOn"
+    payload_off: "bedtimeOff"
+    optimistic: false
+    qos: 0
+    retain: false
+  - platform: mqtt
+    name: "Home Theater"
+    command_topic: "scene/ctrl"
+    payload_on: "theaterOn"
+    payload_off: "theaterOff"
+    optimistic: false
+    qos: 0
+    retain: false
+  - platform: mqtt
+    name: "Fire Lamps"
+    state_topic: "cmnd/sonoff-firelamp/POWER"
+    command_topic: "cmnd/sonoff-firelamp/POWER"
+    availability_topic: "tele/sonoff-firelamp/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Upstairs Accent Lights"
+    state_topic: "cmnd/sonoff-ulaccent/POWER"
+    command_topic: "cmnd/sonoff-ulaccent/POWER"
+    availability_topic: "tele/sonoff-ulaccent/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Utility Room"
+    state_topic: "cmnd/sonoff-utility/POWER"
+    command_topic: "cmnd/sonoff-utility/POWER"
+    availability_topic: "tele/sonoff-utility/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
