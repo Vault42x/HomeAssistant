@@ -1,0 +1,197 @@
+  master_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.utility_room
+      - group.living_room
+      - group.kitchen
+      - group.theater
+      - group.exterior
+      - group.office
+      - group.master_bedroom
+      - group.front_bedroom
+      - group.scenes
+      - group.always_on
+  
+  utility_room:
+    view: yes
+    name: Utility Room
+    icon: mdi:wrench
+    entities:
+      - group.utility_room_lights
+      - group.utility_room_sensors
+      
+  
+  utility_room_lights:  
+    view: no
+    name: Lights
+    icon: mdi:mdi-lightbulb-on-outline
+    entities:  
+      - switch.utility_room
+      
+  utility_room_sensors:  
+    view: no
+    name: Sensors
+    entities:  
+      - sensor.urm_temperature  
+      - sensor.urm_humidity  
+      - sensor.urm_ldr  
+      - sensor.urm_pir
+ 
+  living_room:
+    name: Living Room
+    icon: mdi:sofa
+    view: yes
+    entities:
+      - group.living_room_power
+      - group.living_room_lights
+      - group.living_room_leds
+
+  living_room_power:
+    name: Power Switches
+    view: no
+    entities:
+      - switch.switch_2
+      - switch.switch_9
+
+  living_room_lights:
+    name: Lights
+    icon: mdi:lightbulb-on-outline
+    view: no
+    entities:
+      - switch.switch_7
+      - switch.switch_9
+      - switch.upstairs_accent_lights
+      
+  living_room_leds:
+    name: LEDs
+    view: no
+    entities:
+      - light.ledctrl_upstairs
+
+  kitchen:
+    name: Kitchen
+    icon: mdi:food-fork-drink
+    view: yes
+    entities:
+      - group.kitchen_power
+      - group.kitchen_lights
+      - group.kitchen_sensors
+
+  kitchen_power:
+    name: Kitchen Power
+    entities:
+      - switch.switch_3
+      
+  kitchen_lights:
+    name: Kitchen Lights
+    entities:
+      - light.level
+      - light.ledctrl_kitchen
+      - switch.switch_4 
+  
+  kitchen_sensors:
+    name: Sensors
+    entities:
+      - binary_sensor.sensor
+  
+  theater:
+    name: Home Theater
+    icon: mdi:theater
+    view: yes
+    entities:
+      - group.theater_lights
+      - group.theater_power
+      - group.theater_leds
+      - group.theater_misc
+  
+  theater_lights:
+    name: Lights
+    view: no
+    entities:
+      - light.level_2
+
+  theater_leds:
+    name: Decorations
+    view: no
+    entities:
+      - switch.fire_lamps
+      - light.lightbox 
+
+  theater_power:
+    name: Power
+    view: no
+    entities:
+      - switch.switch_15
+      - switch.switch_11
+
+  theater_sensors:
+    name: Sensors
+    entities:
+      - sensor.homeseer_hsm100_wireless_multisensor_temperature_5
+      - sensor.homeseer_hsm100_wireless_multisensor_luminance_5
+      
+  exterior:
+    name: Exterior
+    view: yes
+    icon: mdi:pine-tree
+    entities:
+      - group.exterior_lights
+      - group.exterior_sensors
+      
+  exterior_lights:
+    name: Lights
+    view: no
+    entities:
+      - switch.switch_8
+      - switch.switch_10
+      
+  exterior_sensors:
+    name: Sensors
+    view: no
+    entities:
+      - binary_sensor.ring_front_door_ding
+      - binary_sensor.ring_front_door_motion
+      - sensor.ext1_temperature  
+      - sensor.ext1_humidity  
+    
+  office:
+    name: Office
+    view: yes
+    icon: mdi:laptop
+    entities:
+      - group.office_computers
+      - group.office_workbench
+      
+  office_workbench:
+    name: Workbench
+    view: no
+    entities:
+      - switch.switch
+      
+  office_computers:
+    name: Computers
+    view: no
+    entities:
+      - switch.switch_12
+      
+  master_bedroom:
+    name: Master Bedroom
+    entities:
+      - switch.switch_6
+      
+  front_bedroom:
+    name: Front Bedroom
+    entities:
+      - switch.switch_19
+      
+  scenes:
+    name: Scenes
+    entities:
+      - switch.bedtime
+      - switch.home_theater
+      
+  always_on:
+    name: Always On
+    entities:
+      - switch.switch_13
