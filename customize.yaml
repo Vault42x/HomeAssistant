@@ -1,0 +1,5 @@
+switch.leviton_dzpa11lw_plugin_appliance_module_switch:
+  friendly_name: Test Switch
+image_processing.openalpr_driveway:
+  friendly_name: OpenALPR
+
