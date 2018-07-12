@@ -1,0 +1,186 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 41.12345
+  longitude: -74.12345
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 33
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+recorder:
+  purge_interval: 2
+  purge_keep_days: 7
+logger:
+  default: warning
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+# map:
+
+# Track the sun
+sun:
+
+google_domains:
+  domain: googledomain.com
+  username: username
+  password: password
+  
+mqtt:
+  broker: core-mosquitto
+#  username: YOUR_USERNAME
+#  password: YOUR_PASSWORD
+
+sensor:  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "sensor-ext1"
+    name: "EXT1 Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "sensor-urm"
+    name: "URM Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+    
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://hassio:3218
+
+zwave:
+  usb_path: /dev/ttyACM0
+  network_key: "SECURE KEY"
+
+#image_processing:
+# - platform: openalpr_cloud
+#   api_key: 'apikey'
+#   region: us
+#   source:
+#    - entity_id: camera.driveway
+    
+media_player:
+  - platform: plex
+
+binary_sensor:
+  - platform: ring
+  
+ring:
+  username: xxx@xxx.com
+  password: password
+
+input_number:
+  lightbox_transition_speed:
+    name: Lightbox Transition Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+  theater_transition_speed:
+    name: Theater Transition Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+
+switch: !include switches.yaml
+light: !include lights.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
