@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 41.12345
-  longitude: -74.12345
+  latitude: !secret home_lat
+  longitude: !secret home_long
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 33
   # metric for Metric, imperial for Imperial
@@ -23,11 +23,13 @@ frontend:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
+  cors_allowed_origins:
+    - http://172.16.1.54:7080
+    
   # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
-
+  
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
@@ -55,82 +57,19 @@ logger:
 logbook:
 
 # Enables a map showing the location of tracked devices
-# map:
+map:
 
 # Track the sun
 sun:
 
 google_domains:
-  domain: googledomain.com
-  username: username
-  password: password
+  domain: !secret google_domain
+  username: !secret google_username
+  password: !secret google_password
   
 mqtt:
   broker: core-mosquitto
-#  username: YOUR_USERNAME
-#  password: YOUR_PASSWORD
 
-sensor:  
-  - platform: mqtt  
-    state_topic: "sensor-ext1"  
-    name: "EXT1 Humidity"  
-    unit_of_measurement: "%"  
-    value_template: '{{ value_json.humidity | round(1) }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-ext1"  
-    name: "EXT1 LDR"
-    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
-    unit_of_measurement: "LUX"  
-    value_template: '{{ value_json.ldr }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-ext1"  
-    name: "EXT1 PIR"  
-    value_template: '{{ value_json.motion }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-ext1"  
-    name: "EXT1 Temperature"  
-    unit_of_measurement: "°F"  
-    value_template: '{{ value_json.temperature | round(1) }}'  
-
-  - platform: mqtt
-    state_topic: "sensor-ext1"
-    name: "EXT1 Real Feel"
-    unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
-
-  - platform: mqtt  
-    state_topic: "sensor-urm"  
-    name: "URM Humidity"  
-    unit_of_measurement: "%"  
-    value_template: '{{ value_json.humidity | round(1) }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-urm"  
-    name: "URM LDR"
-    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
-    unit_of_measurement: "LUX"  
-    value_template: '{{ value_json.ldr }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-urm"  
-    name: "URM PIR"  
-    value_template: '{{ value_json.motion }}'  
-  
-  - platform: mqtt  
-    state_topic: "sensor-urm"  
-    name: "URM Temperature"  
-    unit_of_measurement: "°F"  
-    value_template: '{{ value_json.temperature | round(1) }}'  
-
-  - platform: mqtt
-    state_topic: "sensor-urm"
-    name: "URM Real Feel"
-    unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
-    
 # Text to speech
 tts:
   - platform: google
@@ -142,29 +81,47 @@ panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:wrench
-    url: http://hassio:3218
+    url: http://172.16.1.54:3218
+  tasmoadmin:
+    title: TasmoAdmin
+    icon: mdi:lightbulb-on
+    url: http://172.16.1.54:9541
 
 zwave:
   usb_path: /dev/ttyACM0
-  network_key: "SECURE KEY"
+  network_key: !secret zwave_key
 
 #image_processing:
 # - platform: openalpr_cloud
-#   api_key: 'apikey'
+#   api_key: !secret openalpr_key
 #   region: us
 #   source:
 #    - entity_id: camera.driveway
     
 media_player:
   - platform: plex
-
+  
 binary_sensor:
   - platform: ring
   
 ring:
-  username: xxx@xxx.com
-  password: password
-
+  username: !secret ring_username
+  password: !secret ring_password
+  
+device_tracker:
+  - platform: unifi
+    host: 172.16.1.10
+    verify_ssl: false
+    username: nodered
+    detection_time: 600
+    password: !secret unifi_password
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+    ssid_filter:
+      - 'MAGRATHEA'
+      - 'MAGRATHEA-GUEST'
+ 
 input_number:
   lightbox_transition_speed:
     name: Lightbox Transition Speed
@@ -179,6 +136,7 @@ input_number:
     max: 150
     step: 10
 
+sensor: !include sensors.yaml
 switch: !include switches.yaml
 light: !include lights.yaml
 group: !include groups.yaml

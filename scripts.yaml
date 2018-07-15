@@ -1,0 +1,14 @@
+# Set Downstairs Heat to 62F
+#        - alias: Set Downstairs Heat
+#          service: climate.set_temperature
+#          data:
+#            entity_id: climate.2gig_technologies_unknown_type0001_id001e_unused_3_2
+#            temperature: 62
+# Delay 1 Minute
+#        - delay:
+#            minutes: 1
+# Upstairs Hallway Lights Off
+#        - alias: Hallway Lights Off
+#          service: switch.turn_off
+#          data:
+#            entity_id: switch.switch_7

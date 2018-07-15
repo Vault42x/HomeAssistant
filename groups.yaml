@@ -19,8 +19,9 @@
     icon: mdi:wrench
     entities:
       - group.utility_room_lights
-      - group.utility_room_sensors
-      
+      - sensor.urm_temperature  
+      - sensor.urm_humidity  
+      - sensor.urm_pir
   
   utility_room_lights:  
     view: no
@@ -29,15 +30,6 @@
     entities:  
       - switch.utility_room
       
-  utility_room_sensors:  
-    view: no
-    name: Sensors
-    entities:  
-      - sensor.urm_temperature  
-      - sensor.urm_humidity  
-      - sensor.urm_ldr  
-      - sensor.urm_pir
- 
   living_room:
     name: Living Room
     icon: mdi:sofa
@@ -46,13 +38,16 @@
       - group.living_room_power
       - group.living_room_lights
       - group.living_room_leds
+      - group.living_room_av
+      - sensor.aeotec_dsc06106_smart_energy_switch_power_8
+      - sensor.aeotec_dsc06106_smart_energy_switch_previous_reading_7
 
   living_room_power:
     name: Power Switches
     view: no
     entities:
       - switch.switch_2
-      - switch.switch_9
+      - switch.aeotec_dsc06106_smart_energy_switch_switch_2
 
   living_room_lights:
     name: Lights
@@ -68,6 +63,13 @@
     view: no
     entities:
       - light.ledctrl_upstairs
+      
+  living_room_av:
+    name: AV
+    view: no
+    entities:
+      - media_player.android_tv
+      - switch.upstairs_subwoofer
 
   kitchen:
     name: Kitchen
@@ -76,7 +78,7 @@
     entities:
       - group.kitchen_power
       - group.kitchen_lights
-      - group.kitchen_sensors
+      - binary_sensor.sensor
 
   kitchen_power:
     name: Kitchen Power
@@ -90,13 +92,8 @@
       - light.ledctrl_kitchen
       - switch.switch_4 
   
-  kitchen_sensors:
-    name: Sensors
-    entities:
-      - binary_sensor.sensor
-  
   theater:
-    name: Home Theater
+    name: Theater
     icon: mdi:theater
     view: yes
     entities:
@@ -104,6 +101,10 @@
       - group.theater_power
       - group.theater_leds
       - group.theater_misc
+      - sensor.aeotec_dsc06106_smart_energy_switch_power
+      - sensor.unknown_2
+      - sensor.homeseer_hsm100_wireless_multisensor_temperature_5
+      - sensor.ecolink_motion_detector_burglar_2
   
   theater_lights:
     name: Lights
@@ -131,30 +132,31 @@
       - sensor.homeseer_hsm100_wireless_multisensor_temperature_5
       - sensor.homeseer_hsm100_wireless_multisensor_luminance_5
       
-  exterior:
-    name: Exterior
+  outside:
+    name: Outside
     view: yes
     icon: mdi:pine-tree
     entities:
-      - group.exterior_lights
-      - group.exterior_sensors
+      - group.outside_lights
+      - group.outside_sensors
+      - sensor.outside_temperature  
+      - sensor.outside_humidity  
+      - sensor.outside_real_feel
       
-  exterior_lights:
+  outside_lights:
     name: Lights
     view: no
     entities:
       - switch.switch_8
       - switch.switch_10
       
-  exterior_sensors:
+  outside_sensors:
     name: Sensors
     view: no
     entities:
       - binary_sensor.ring_front_door_ding
       - binary_sensor.ring_front_door_motion
-      - sensor.ext1_temperature  
-      - sensor.ext1_humidity  
-    
+
   office:
     name: Office
     view: yes
@@ -162,6 +164,7 @@
     entities:
       - group.office_computers
       - group.office_workbench
+      - group.office_av
       
   office_workbench:
     name: Workbench
@@ -175,12 +178,41 @@
     entities:
       - switch.switch_12
       
+  office_av:
+    name: AV
+    view: no
+    entities:
+      - media_player.chrome
+
+  downstairs:
+    name: Downstairs
+    icon: mdi:arrow-down-bold
+    view: yes
+    entities:
+      - switch.switch_13
+      - light.ledctrl_downstairs
+      - climate.2gig_technologies_ct101_thermostat_iris_heating_1
+      - binary_sensor.sensor_2
+      - sensor.2gig_technologies_ct101_thermostat_iris_temperature
+
+  bedrooms:
+    view: yes
+    icon: mdi:bed-empty
+    name: Bedrooms
+    entities:
+      - group.master_bedroom
+      - group.front_bedroom
+
   master_bedroom:
+    view: no
+    icon: mdi:bed-empty
     name: Master Bedroom
     entities:
       - switch.switch_6
       
   front_bedroom:
+    view: no
+    icon: mdi:bed-empty
     name: Front Bedroom
     entities:
       - switch.switch_19

@@ -1,0 +1,77 @@
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "Outside Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "EXT1 PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-ext1"  
+    name: "Outside Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "sensor-ext1"
+    name: "Outside Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "sensor-urm"  
+    name: "URM Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "sensor-urm"
+    name: "URM Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+    
+  - platform: mqtt
+    state_topic: "tele/sonoff-wall1/SENSOR"
+    name: "Subwoofer Total kWh"
+    unit_of_measurement: "kWh"
+    value_template: '{{ value_json["ENERGY"]["Total"] }}'
+    
+  - platform: mqtt
+    state_topic: "tele/sonoff-wall1/SENSOR"
+    name: "Subwoofer Power"
+    unit_of_measurement: "W"
+    value_template: '{{ value_json["ENERGY"]["Power"] }}'
+    
+  - platform: mqtt
+    state_topic: "tele/sonoff-wall1/SENSOR"
+    name: "Subwoofer Voltage"
+    unit_of_measurement: "VDC"
+    value_template: '{{ value_json["ENERGY"]["Voltage"] }}'
