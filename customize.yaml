@@ -2,4 +2,33 @@ switch.leviton_dzpa11lw_plugin_appliance_module_switch:
   friendly_name: Test Switch
 image_processing.openalpr_driveway:
   friendly_name: OpenALPR
-
+device_tracker.phone1:
+  friendly_name: User1
+  entity_picture: /local/User1.png
+device_tracker.phone2:
+  friendly_name: User2
+  entity_picture: /local/User2.png
+switch.switch_9:
+  icon: mdi:lightbulb-on
+switch.switch_2:
+  icon: mdi:laptop-mac
+light.ledctrl_kitchen:
+  icon: mdi:led-strip
+light.ledctrl_downstairs:
+  icon: mdi:led-strip
+light.ledctrl_upstairs:
+  icon: mdi:led-strip
+switch.switch_12:
+  icon: mdi:desktop-tower
+switch.aeotec_dsc06106_smart_energy_switch_switch_2:
+  icon: mdi:theater
+switch.switch_15:
+  icon: mdi:theater
+switch.switch_19:
+  icon: mdi:theater
+switch.switch_6:
+  icon: mdi:theater
+switch.upstairs_subwoofer:
+  icon: mdi:speaker
+sensor.2gig_technologies_ct101_thermostat_iris_temperature:
+  friendly_name: Downstairs Temp
